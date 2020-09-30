@@ -84,13 +84,14 @@ def csv_entries():
 @app.route('/terminate/<task_id>', methods=['GET'])
 def terminate(task_id):
     print(AsyncResult(task_id, app=celery).state)
-    delete_rows(task_id)
-    Task.update_state(self=celery, task_id=task_id, state='REVOKED')
-    terminated_entry = TerminatedTasks(task_id=task_id)
+    delete_rows(task_id)                                             # delete the csv_entries by the task to be terminated
+    Task.update_state(self=celery, task_id=task_id, state='REVOKED') # state update to REVOKED
+    terminated_entry = TerminatedTasks(task_id=task_id)              # write the task to TerminatedTasks table
     db.session.add(terminated_entry)
     db.session.commit()
+    
     task = Tasks.query.filter_by(id=task_id).first()
-    task.state = 'REVOKED'
+    task.state = 'REVOKED'                                           # update the state in Tasks table
     db.session.commit()
     return jsonify({'task_id': task_id, 'status': str(AsyncResult(task_id, app=celery).state)}), 200
 
@@ -98,7 +99,7 @@ def terminate(task_id):
 # Pauses the task of given id
 @app.route('/pause/<task_id>', methods=['GET'])
 def pause(task_id):
-    Task.update_state(self=celery, task_id=task_id, state='PAUSED')
+    Task.update_state(self=celery, task_id=task_id, state='PAUSED')   # state update
     return jsonify({'task_id': task_id, 'status': str(AsyncResult(task_id, app=celery).state)}), 200
 
 
@@ -107,7 +108,7 @@ def pause(task_id):
 def resume_task(task_id):
     Task.update_state(self=celery, task_id=task_id, state='PROCESSING')
     file_path, last_row = get_file_info(task_id)
-    csv_upload.delay(path=file_path, start_row=last_row,resume=True, task_id=task_id)
+    csv_upload.delay(path=file_path, start_row=last_row,resume=True, task_id=task_id) # send the task to csv_upload with state updated to PROCESSING
     return jsonify({'task_id': task_id, 'status': 'PROCESSING'}), 200
 
 
