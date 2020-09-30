@@ -32,6 +32,7 @@ Proposed solution uses the following technologies and dependencies:
 API endpoint to accept a file for upload and starts the task
 
 ![title](resources/screenshots/first.png)
+
 <br>
 
 ### ```/tasks```
@@ -39,6 +40,7 @@ This returns all the tasks that were called, revoked or paused by the user
 ![title](resources/screenshots/tasks.png)
 
 <br>
+
 ### ```/csv_entries```
 Returns all the entries imported in database (```CsvEntries``` table) (only for representation purposes)
 ![title](resources/screenshots/csv_entries.png)
@@ -48,29 +50,36 @@ Returns all the entries imported in database (```CsvEntries``` table) (only for 
 ### ```/pause/<task_id>```
 Pause the task of the given ```task_id```. ```PAUSED``` tasks can be resumed in the future. When task is paused the last processed row number (```last_row```) of CSV file is saved with the task_id in the ```PausedTasks``` table.
 ![title](resources/screenshots/pause.png)
+
 <br>
+
 ![title](resources/screenshots/paused2.png)
+
 <br>
+
 ### ```/terminate/<task_id>```
 Terminate or Revoke the task of the given ```task_id```. ```REVOKED``` tasks can't be resumed in the future. When a task is terminated the entries made by the task on the ```CsvEntries``` table is also deleted.
 ![title](resources/screenshots/revoked.png)
 
 <br>
+
 ### ```/resume/<task_id>```
 Resume the ```PAUSED``` task of given ```task_id```. When this API point is called the CSV import resumes from the ```last_row``` where task was paused.
 ![title](resources/screenshots/resume.png)
 
 <br>
+
 ### ```/terminated_tasks```
 Lists all ```REVOKED``` tasks
 ![title](resources/screenshots/t_tasks.png)
 
 <br>
+
 ### ```/paused_tasks```
 Lists all ```PAUSED``` tasks
 ![title](resources/screenshots/paused_tasks.png)
 
-
+<br>
 
 # Installation (Using Docker)
 
@@ -105,5 +114,5 @@ $ python3 worker.py
 ### Todos
 
  - Make resume function more efficient by improving skipping of rows
- - Add exception handling wherever missed
+ - Add exception handling wherever necessary
 
