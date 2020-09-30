@@ -31,6 +31,8 @@ Proposed solution uses the following technologies and dependencies:
 ### ```/```
 API endpoint to accept a file for upload and starts the task
 
+<br/>
+
 ![title](resources/screenshots/first.png)
 
 <br/>
@@ -42,13 +44,20 @@ This returns all the tasks that were called, revoked or paused by the user
 <br/>
 
 ### ```/csv_entries```
-Returns all the entries imported in database (```CsvEntries``` table) (only for representation purposes)
+Returns all the entries imported in database (```CsvEntries``` table)
+
+<br/>
+
 ![title](resources/screenshots/csv_entries.png)
 
 <br/>
 
 ### ```/pause/<task_id>```
 Pause the task of the given ```task_id```. ```PAUSED``` tasks can be resumed in the future. When task is paused the last processed row number (```last_row```) of CSV file is saved with the task_id in the ```PausedTasks``` table.
+
+<br/>
+
+
 ![title](resources/screenshots/pause.png)
 
 <br/>
@@ -65,24 +74,43 @@ Task is paused and entry of data points to the DB is stopped
 
 ### ```/terminate/<task_id>```
 Terminate or Revoke the task of the given ```task_id```. ```REVOKED``` tasks can't be resumed in the future. When a task is terminated the entries made by the task on the ```CsvEntries``` table is also deleted.
-![title](resources/screenshots/revoked.png)
 
 <br/>
+
+
+![title](resources/screenshots/revoked.png)
+
+
+<br/>
+
 
 ### ```/resume/<task_id>```
 Resume the ```PAUSED``` task of given ```task_id```. When this API point is called the CSV import resumes from the ```last_row``` where task was paused.
-![title](resources/screenshots/resume.png)
 
 <br/>
 
+![title](resources/screenshots/resume.png)
+
+
+<br/>
+
+
 ### ```/terminated_tasks```
 Lists all ```REVOKED``` tasks
+
+<br/>
+
+
 ![title](resources/screenshots/t_tasks.png)
 
 <br/>
 
 ### ```/paused_tasks```
 Lists all ```PAUSED``` tasks
+
+<br/>
+
+
 ![title](resources/screenshots/paused_tasks.png)
 
 <br/>
