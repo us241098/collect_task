@@ -14,4 +14,5 @@ options = {
     'traceback': True,
 }
 
+# Starts Celery worker
 worker.run(**options)

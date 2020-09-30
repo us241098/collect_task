@@ -1,7 +1,7 @@
 from atlanBackend import db
 from flask import Flask
 
-# User Model Definition
+# CSV Entries to be imported to DB
 class CsvEntries(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     taskID = db.Column(db.Integer, db.ForeignKey('tasks.id'), index=True)
@@ -14,6 +14,7 @@ class CsvEntries(db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.id)
 
+# Tasks Model
 class Tasks(db.Model):
     id = db.Column(db.String(40), primary_key=True)
     operation = db.Column(db.String(30), index=True)
@@ -24,12 +25,10 @@ class Tasks(db.Model):
     def __repr__(self):
         return '<Task {}>'.format(self.id)
 
-    
-    
 # RevokedTask Model Definition
 class TerminatedTasks(db.Model):
     task_id = db.Column(db.String(36), primary_key=True)
-    # Getting the string representation of model on querying
+
     def __repr__(self):
         return '<Revoked Tasks {}>'.format(self.task_id)
     
@@ -37,8 +36,9 @@ class TerminatedTasks(db.Model):
 class PausedTasks(db.Model):
     task_id = db.Column(db.String(36), primary_key=True)
     last_row = db.Column(db.Integer)
-    # Getting the string representation of model on querying
+
     def __repr__(self):
         return '<Paused Tasks {}>'.format(self.task_id)
-    
+
+# Create all tables
 db.create_all()
