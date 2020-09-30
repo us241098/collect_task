@@ -20,9 +20,11 @@ Proposed solution uses the following technologies and dependencies:
   - These states are changed using API endpoints and are monitored using ```AsyncResult(...).state``` function and writing to the database is accordingly taken care of.
 
 
-# Working with respect to example cases in the problem statement
+# Working with respect to example cases in the Problem Statement
 
-  - Since first task was all about pausing  
+  - Solution developed in the repository can handle the issue in Example 1 without any changes. As the task in the example 1 was to pause, terminate and resume import operation to DB from an uploaded CSV file, our solution offers all 3 functionalities using API endpoints mentioned below.
+  - Example 3 in the statement is also a case of Example 1 now with our terminate API endpoint user can stop the terminate the task and the database entry by the terminated tasks will also be deleted. After that one can upload the correct CSV.
+  - Example 2 is also very similar to the 1 and 3, we can consider export to the Dashboard as write operations to the Dashboard table/DB. This export is equivalent to copying of data points from one DB (collect DB) to another (dashboard DB). Since our solution handles the copying from CSV to DB we can easily extend it to the case in Example 2.
 
 
 # API Endpoints
