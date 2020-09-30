@@ -20,7 +20,7 @@ Proposed solution uses the following technologies and dependencies:
   - These states are changed using API endpoints and are monitored using ```AsyncResult(...).state``` function and writing to the database is accordingly taken care of.
 
 
-# Working with respect to example cases in the Problem Statement
+# Working with respect to example cases in the [Problem Statement](https://docs.google.com/document/d/1wma52BMH-07BOxpqWzqIUW5uKIXaCj0j6gPftiwLobE/edit)
 
   - Solution developed in the repository can handle the issue in Example 1 without any changes. As the task in the example 1 was to pause, terminate and resume import operation to DB from an uploaded CSV file, our solution offers all 3 functionalities using API endpoints mentioned below.
   - Example 3 in the statement is also a case of Example 1 now with our terminate API endpoint user can stop the terminate the task and the database entry by the terminated tasks will also be deleted. After that one can upload the correct CSV.
@@ -33,53 +33,59 @@ API endpoint to accept a file for upload and starts the task
 
 ![title](resources/screenshots/first.png)
 
-<br>
+<br/>
 
 ### ```/tasks```
 This returns all the tasks that were called, revoked or paused by the user
 ![title](resources/screenshots/tasks.png)
 
-<br>
+<br/>
 
 ### ```/csv_entries```
 Returns all the entries imported in database (```CsvEntries``` table) (only for representation purposes)
 ![title](resources/screenshots/csv_entries.png)
 
-<br>
+<br/>
 
 ### ```/pause/<task_id>```
 Pause the task of the given ```task_id```. ```PAUSED``` tasks can be resumed in the future. When task is paused the last processed row number (```last_row```) of CSV file is saved with the task_id in the ```PausedTasks``` table.
 ![title](resources/screenshots/pause.png)
 
-<br>
+<br/>
+
+Task is paused and entry of data points to the DB is stopped
+
+
+<br/>
+
 
 ![title](resources/screenshots/paused2.png)
 
-<br>
+<br/>
 
 ### ```/terminate/<task_id>```
 Terminate or Revoke the task of the given ```task_id```. ```REVOKED``` tasks can't be resumed in the future. When a task is terminated the entries made by the task on the ```CsvEntries``` table is also deleted.
 ![title](resources/screenshots/revoked.png)
 
-<br>
+<br/>
 
 ### ```/resume/<task_id>```
 Resume the ```PAUSED``` task of given ```task_id```. When this API point is called the CSV import resumes from the ```last_row``` where task was paused.
 ![title](resources/screenshots/resume.png)
 
-<br>
+<br/>
 
 ### ```/terminated_tasks```
 Lists all ```REVOKED``` tasks
 ![title](resources/screenshots/t_tasks.png)
 
-<br>
+<br/>
 
 ### ```/paused_tasks```
 Lists all ```PAUSED``` tasks
 ![title](resources/screenshots/paused_tasks.png)
 
-<br>
+<br/>
 
 # Installation (Using Docker)
 
