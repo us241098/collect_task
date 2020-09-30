@@ -73,7 +73,7 @@ Task is paused and entry of data points to the DB is stopped
 <br/>
 
 ### ```/terminate/<task_id>```
-Terminate or Revoke the task of the given ```task_id```. ```REVOKED``` tasks can't be resumed in the future. When a task is terminated the entries made by the task on the ```CsvEntries``` table is also deleted.
+Terminate or Revoke the task of the given ```task_id```. ```REVOKED``` tasks can't be resumed in the future. When a task is terminated the entries made by the task on the ```CsvEntries``` table are also deleted.
 
 <br/>
 
@@ -106,7 +106,7 @@ Lists all ```REVOKED``` tasks
 <br/>
 
 ### ```/paused_tasks```
-Lists all ```PAUSED``` tasks
+Lists all ```PAUSED``` tasks along with their ```last_row``` written
 
 <br/>
 
